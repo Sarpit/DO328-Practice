@@ -24,7 +24,7 @@ spec:
         sidecar.istio.io/inject: "true"
     spec:
       containers:
-      - image: quay.io/redhattraining/ossm-maven-simplest:1.0
+      - image: quay.io/redhattraining/ossm-maven-simplest:2.0
         name: headers
         ports:
         - containerPort: 8080
