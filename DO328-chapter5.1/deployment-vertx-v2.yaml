@@ -1,0 +1,34 @@
+apiVersion: apps/v2
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: vertx-greet
+    version: v2
+  name: vertx-greet-v2
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: vertx-greet
+      version: v2
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: vertx-greet
+        version: v2
+      annotations:
+        sidecar.istio.io/inject: "true"
+    spec:
+      containers:
+      - image: quay.io/redhattraining/ossm-vertx-greet:1.0
+        name: vertx-greet
+        ports:
+        - containerPort: 8080
+        env:
+        - name: GREETING
+          value: "Hello Red Hat!"
+        resources: {}
+status: {}

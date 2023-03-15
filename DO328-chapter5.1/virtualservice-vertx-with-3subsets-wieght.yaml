@@ -1,0 +1,31 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: vertx
+spec:
+  gateways:
+  - vertx-gw
+  hosts:
+  - "*"
+  http:
+  - route:
+    - destination:
+        host: vertx-greet
+        subset: v1
+        port:
+          number: 8080
+      weight: 10
+  - route:
+    - destination:
+        host: vertx-greet
+        subset: v2
+        port:
+          number: 8080
+      weight: 45
+  - route:
+    - destination:
+        host: vertx-greet
+        subset: v3
+        port:
+          number: 8080
+      weight: 45
