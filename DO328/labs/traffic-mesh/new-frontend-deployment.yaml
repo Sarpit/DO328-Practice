@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: _NAME_
+labels:
+  app: _APP_
+  version: _VERSION_
+spec:
+  selector:
+    matchLabels:
+      app: _APP_
+      version: _VERSION_
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: _APP_
+        version: _VERSION_
+      annotations:
+        sidecar.istio.io/inject: "true"
+    spec:
+      containers:
+        - name: frontend
+          image: _IMAGE_
+          imagePullPolicy: Always
+          env:
+            - name: _ENV_NAME_
+              valueFrom:
+                configMapKeyRef:
+                  name: _CM_NAME_
+                  key: _KEY_
