@@ -1,0 +1,19 @@
+#oc set env deployment/istiod-basic PILOT_SIDECAR_USE_REMOTE_ADDRESS=true -n istio-system
+#oc get pods -n istio-system
+apiVersion: networking.istio.io/v1beta1
+kind: VirtualService
+metadata:
+  name: preference-vs
+spec:
+  hosts:
+    - preference
+  http:
+    - headers:
+        request:
+          add:
+            x-envoy-upstream-rq-timeout-ms: "500"
+      route:
+        - destination:
+            host: preference
+            port:
+              number: 8080
