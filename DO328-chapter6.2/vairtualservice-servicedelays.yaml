@@ -1,0 +1,16 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: chaos-error
+spec:
+  hosts:
+  - recommendation
+  http:
+  - route:
+    - destination:
+        host: vertx-greet
+    fault:
+      delay:
+        fixedDelay: 400ms
+        percentage:
+          value: 50.0
